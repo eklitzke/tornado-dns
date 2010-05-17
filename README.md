@@ -30,10 +30,10 @@ Basic Usage:
 The most basic possible usage:
 
     def success(addresses):
-        print 'addresses: %s' % (addresses,)
+        print 'the address is %s' % (addresses['www.iomonad.com'],)
     
     # timeout after 5000 milliseconds
-    tornado_dns.lookup("www.eklitzke.org", success, timeout=5000)
+    tornado_dns.lookup("www.iomonad.com", success, timeout=5000)
 
 You'll need to do the lookup in the context of a tornado IOLoop that's
 running. Look at `example.py` for a very slightly more example.
@@ -57,6 +57,9 @@ There's no support for non-recursive queries. In particular, you must have a
 nameserver in your `/etc/resolv.conf` that's capable of performing recursive DNS
 lookups. This should be OK for 99.9% of people, but it's something I'd like to
 fix anyway.
+
+If you find other bugs, have patches, etc. please contact the author via private
+message on github (username `eklitzke`) or via email, `evan@eklitzke.org`.
 
 Tests
 -----
