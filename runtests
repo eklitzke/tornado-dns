@@ -1,0 +1,2 @@
+#!/bin/bash
+python -m qa -m tornado_dns.tests -c process -w 3 -v

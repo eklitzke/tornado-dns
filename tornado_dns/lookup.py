@@ -1,4 +1,5 @@
 import time
+import errno
 import socket
 import tornado.ioloop
 
@@ -47,7 +48,15 @@ def lookup(name, callback, errback=None, timeout=None, server=None):
     query = DNSPacket.create_a_question(name)
 
     def read_response(fd, events):
-        data, addr = sock.recvfrom(1500)
+        try:
+            data, addr = sock.recvfrom(1500)
+        except socket.error, e:
+            # tornado lied to us??
+            if e.errno == errno.EAGAIN:
+                io_loop.remove_handler(fd)
+                io_loop.add_handler(fd, read_response, io_loop.READ)
+                return
+            raise
         response = DNSPacket.from_wire(data)
         callback(response.get_answer_names())
         io_loop.remove_handler(fd)
