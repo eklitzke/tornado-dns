@@ -29,11 +29,13 @@ Basic Usage:
 
 The most basic possible usage:
 
-    def success(addresses):
-        print 'the address is %s' % (addresses['www.iomonad.com'],)
-    
-    # timeout after 5000 milliseconds
-    tornado_dns.lookup("www.iomonad.com", success, timeout=5000)
+```python
+def success(addresses):
+    print 'the address is %s' % (addresses['www.iomonad.com'],)
+
+# timeout after 5000 milliseconds
+tornado_dns.lookup("www.iomonad.com", success, timeout=5000)
+```
 
 You'll need to do the lookup in the context of a tornado IOLoop that's
 running. Look at `example.py` for a very slightly more example.
